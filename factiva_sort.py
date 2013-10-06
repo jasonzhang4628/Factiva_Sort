@@ -53,9 +53,9 @@ def process_line(line, writer, header):
     tokens = line.split(" ")
     match = re.match(pattern, tokens[0])
     if match and match.group(0) in categories:
-        return (match.group(0), line)
+        return match.group(0), line
     else:
-        return (header, line)
+        return header, line
         
 def write_data(article_dict, writer):
     """Writes the collected data to the csv file on a new row. Loops through
@@ -71,6 +71,11 @@ def write_data(article_dict, writer):
 # Main thread #
 ###############
 def main():
+    """Reads each line of standard input and assigns it to a dictionary of
+    category values to strings, concatenating each new line to the old string
+    under the matching category if there is not a change in category. When a
+    change in article is detected, data is written to the CSV file and article
+    is reset."""
     writer, file_name = csv_setup()
     article = article_template.copy()
     sorted_line = (None, None)
@@ -78,7 +83,6 @@ def main():
     header = categories[0]
     for line in fileinput.input():
         sorted_line = process_line(line, writer, header)
-        #change in header
         if sorted_line[0] != header:
             article[header] = grouped_lines
             if categories.index(header) > categories.index(sorted_line[0]):
@@ -87,7 +91,8 @@ def main():
             header = sorted_line[0]
             grouped_lines = ""
         if sorted_line[1]:
-            grouped_lines += " " + sorted_line[1]
+            grouped_lines += sorted_line[1] + " "
+    write_data(article, writer)
     print("Written to " + file_name + ".")         
 
 
