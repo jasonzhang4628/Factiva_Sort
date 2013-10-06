@@ -1,9 +1,7 @@
+#!/usr/bin/env python
 # encoding utf-8
 """
 factiva_sort.py
-
-@author Jason L. Zhang
-jason.zhang@berkeley.edu
 
 Sorts a plaintext Factiva file into individual articles with corresponding
 metadata.
@@ -14,20 +12,23 @@ File name? Do not include '.csv'. All data will be written to one file.
 output
 Data written to output.csv.
 """
-#####################
-# Customizable data #
-#####################
+import fileinput
+import re
+import csv
+
+__author__ = "Jason L. Zhang"
+
+__maintainer__ "Jason L. Zhang"
+__email__ = "jason.zhang@berkeley.edu"
+__status__ = "Prototype"
+
+################################
+# Input Specific, Customizable #
+################################
 
 categories = ["SE", "HD", "BY", "CR", "WC", "PD", "SN", "SC", "PG", 
 "LA", "CY", "LP", "TD", "RF", "CO", "RE", "PUB", "AN"]
 article_template = {k : [] for k in categories}
-
-#####################
-# Necessary modules #
-#####################
-import fileinput
-import re
-import csv
 
 #############
 # Functions #
@@ -95,11 +96,5 @@ def main():
     write_data(article, writer)
     print("Written to " + file_name + ".")         
 
-
-
 if __name__ == '__main__':
     main()
-
-
-
-
