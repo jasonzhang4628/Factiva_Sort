@@ -18,7 +18,7 @@ import csv
 
 __author__ = "Jason L. Zhang"
 
-__maintainer__ "Jason L. Zhang"
+__maintainer__ = "Jason L. Zhang"
 __email__ = "jason.zhang@berkeley.edu"
 __status__ = "Prototype"
 
@@ -28,7 +28,9 @@ __status__ = "Prototype"
 
 categories = ["SE", "HD", "BY", "CR", "WC", "PD", "SN", "SC", "PG", 
 "LA", "CY", "LP", "TD", "RF", "CO", "RE", "PUB", "AN"]
-article_template = {k : [] for k in categories}
+article_template = {k : "" for k in categories}
+format_body = False
+format_spacer = "\n" if format_body else " "
 
 #############
 # Functions #
@@ -92,9 +94,10 @@ def main():
             header = sorted_line[0]
             grouped_lines = ""
         if sorted_line[1]:
-            grouped_lines += sorted_line[1] + " "
+            grouped_lines += sorted_line[1] + format_spacer
     write_data(article, writer)
     print("Written to " + file_name + ".")         
-
+    print("Default setting is to not format articles. Change 'format_body'" + \
+    " to 'True' if formatting is desired.")
 if __name__ == '__main__':
     main()
