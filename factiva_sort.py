@@ -39,8 +39,10 @@ def csv_setup():
     """Sets up a new csv file with user input for the name, returns a writer
     for the new file."""
     file_name = str(raw_input(
-    "File name? Do not include '.csv'. " + \
-    "All data will be written to one file. \n"))
+    "File name? Do not include '.csv', leave blank for default " + \
+    "'output.csv'.  All data will be written to one file. \n"))
+    if file_name == '':
+        file_name = 'output'
     file_name = file_name + ".csv"
     output = open(file_name, 'wb')
     writer = csv.writer(output)
@@ -53,10 +55,13 @@ def process_line(line, writer, header):
     and line."""
     pattern = re.compile("[A-Z]{2,3}\Z")
     line = line.strip()
-    tokens = line.split(" ")
+    tokens = line.split(" ", 1)
     match = re.match(pattern, tokens[0])
     if match and match.group(0) in categories:
-        return match.group(0), line
+        if len(tokens) > 1:
+            return match.group(0), tokens[1].strip()
+        elif len(tokens) == 1:
+            return match.group(0), ""
     else:
         return header, line
         
@@ -97,7 +102,6 @@ def main():
             grouped_lines += sorted_line[1] + format_spacer
     write_data(article, writer)
     print("Written to " + file_name + ".")         
-    print("Default setting is to not format articles. Change 'format_body'" + \
-    " to 'True' if formatting is desired.")
+
 if __name__ == '__main__':
     main()
