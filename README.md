@@ -3,6 +3,7 @@ Factiva_Sort
 
 Python scripts for working with database text files downloaded from Factiva.
 
+/** Running Instructions */
 Open terminal and cd to your directory containing factiva_sort.py, ideally you would have your input
 files in this directory as well.
 
