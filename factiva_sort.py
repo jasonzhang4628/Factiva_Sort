@@ -22,15 +22,20 @@ __maintainer__ = "Jason L. Zhang"
 __email__ = "jason.zhang@berkeley.edu"
 __status__ = "Prototype"
 
-################################
-# Input Specific, Customizable #
-################################
+##################
+# Input Specific #
+##################
 
 categories = ["SE", "HD", "BY", "CR", "WC", "PD", "SN", "SC", "PG", 
-"LA", "CY", "LP", "TD", "RF", "CO", "RE", "PUB", "AN"]
-article_template = {k : "" for k in categories}
+             "LA", "CY", "LP", "TD", "RF", "CO", "RE", "PUB", "AN"]
+article_template = {k : "" for k in category_titles}
 format_body = False
 format_spacer = "\n" if format_body else " "
+
+
+#Do not modify.
+category_titles = ["SE", "HD", "BY", "CR", "WC", "PD", "SN", "SC", "PG",   
+                  "LA", "CY", "LP", "TD", "RF", "CO", "RE", "PUB", "AN"]
 
 #############
 # Functions #
@@ -71,8 +76,7 @@ def write_data(article_dict, writer):
     categories in order."""
     output = []
     for section in categories:
-        out_string = article_dict[section]
-        output.append(out_string)
+        output.append(article_dict[section])
     writer.writerow(output)    
 
 ###############
