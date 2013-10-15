@@ -28,7 +28,6 @@ __status__ = "Prototype"
 
 categories = ["SE", "HD", "BY", "CR", "WC", "PD", "SN", "SC", "PG", 
              "LA", "CY", "LP", "TD", "RF", "CO", "RE", "PUB", "AN"]
-article_template = {k : "" for k in category_titles}
 format_body = False
 format_spacer = "\n" if format_body else " "
 
@@ -36,6 +35,7 @@ format_spacer = "\n" if format_body else " "
 #Do not modify.
 category_titles = ["SE", "HD", "BY", "CR", "WC", "PD", "SN", "SC", "PG",   
                   "LA", "CY", "LP", "TD", "RF", "CO", "RE", "PUB", "AN"]
+article_template = {k : "" for k in category_titles}
 
 #############
 # Functions #
